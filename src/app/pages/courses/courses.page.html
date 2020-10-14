@@ -1,0 +1,14 @@
+<app-page-container>
+  <app-breadcrumbs></app-breadcrumbs>
+  <div class="search-container">
+    <input type="text" id="courseSearch" />
+    <button>Search</button>
+  </div>
+  <div class="add-course-container">
+    <button><fa-icon [icon]="addCourseIcon"></fa-icon>Add course</button>
+  </div>
+  <app-courses-container [courses]="courses"></app-courses-container>
+  <div class="load-more">
+    <button class="load-more-button">Load more</button>
+  </div>
+</app-page-container>

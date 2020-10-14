@@ -1,0 +1,22 @@
+<div class="card">
+  <header class="header">
+    <h2>{{ title }}</h2>
+    <div class="timeInfo">
+      <span class="durationIcon"
+        ><fa-icon [icon]="durationIcon"></fa-icon>
+        {{ duration | hoursFromMinutes }}</span
+      >
+      <span
+        ><fa-icon [icon]="creationIcon"></fa-icon>
+        {{ creationTime | date: 'dd/MM/yyyy' }}</span
+      >
+    </div>
+  </header>
+  <section class="content">
+    <p class="description">{{ description }}</p>
+    <div class="buttons">
+      <button><fa-icon [icon]="editIcon"></fa-icon> Edit</button>
+      <button><fa-icon [icon]="deleteIcon"></fa-icon> Delete</button>
+    </div>
+  </section>
+</div>

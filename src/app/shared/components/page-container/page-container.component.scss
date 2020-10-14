@@ -1,0 +1,12 @@
+:host {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  grid-template-columns: 100%;
+}
+
+.content {
+  display: block;
+  padding-bottom: 2rem;
+  background-color: #f5f6fa;
+}
