@@ -1,0 +1,23 @@
+.header {
+  display: flex;
+  background-color: #303240;
+  height: 5rem;
+  width: 100%;
+  padding-left: 4rem;
+  padding-right: 4rem;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.logo {
+  margin-right: auto;
+}
+
+.buttons {
+  & button {
+    background-color: #303240;
+    color: white;
+    border: none;
+    margin: 0 0.3rem;
+  }
+}

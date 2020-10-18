@@ -1,0 +1,27 @@
+:host {
+  display: flex;
+}
+
+span {
+  color: white;
+  font-weight: 600;
+  font-size: 1.25rem;
+  text-transform: uppercase;
+}
+
+.oval {
+  border-color: #979797;
+  border-width: 2px;
+  border-style: solid;
+  height: 28px;
+  width: 28px;
+}
+
+.triangle {
+  background-image: linear-gradient(141deg, #0079ad 11%, #b4d084 100%);
+  transform: rotate(-270deg);
+  border-radius: 1px;
+  background-color: #d8d8d8;
+  height: 12px;
+  width: 16px;
+}
