@@ -1,6 +1,9 @@
-import { Course } from '../../shared/interfaces/course';
 import { Component } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
+import { Course } from '@interfaces/course';
+import { CoursesService } from '@services/courses.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-courses',
@@ -8,28 +11,25 @@ import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./courses.page.scss'],
 })
 export class CoursesComponent {
-  readonly courses: Course[] = [
-    {
-      id: 'course-1',
-      title: 'Video Course 1. Name tag',
-      description: `Learn about where you can find course descriptions, what information they include, how they work, and details about various components of a course description. Course descriptions report information about a university or college's classes. They're published both in course catalogs that outline degree requirements and in course schedules that contain descriptions for all courses offered during a particular semester.`,
-      duration: 88,
-      creationTime: new Date(2020, 8, 28),
-    },
-    {
-      id: 'course-2',
-      title: 'Video Course 1. Name tag',
-      description: `Learn about where you can find course descriptions, what information they include, how they work, and details about various components of a course description. Course descriptions report information about a university or college's classes. They're published both in course catalogs that outline degree requirements and in course schedules that contain descriptions for all courses offered during a particular semester.`,
-      duration: 88,
-      creationTime: new Date(2020, 8, 28),
-    },
-    {
-      id: 'course-3',
-      title: 'Video Course 1. Name tag',
-      description: `Learn about where you can find course descriptions, what information they include, how they work, and details about various components of a course description. Course descriptions report information about a university or college's classes. They're published both in course catalogs that outline degree requirements and in course schedules that contain descriptions for all courses offered during a particular semester.`,
-      duration: 88,
-      creationTime: new Date(2020, 8, 28),
-    },
-  ];
+  searchControl = new FormControl('');
+
+  constructor(private readonly coursesService: CoursesService) {}
+
+  get courses$(): Observable<Course[]> {
+    return this.coursesService.courses$;
+  }
+
   addCourseIcon = faPlusCircle;
+
+  onCardDelete(course: Course): void {
+    console.log('delete ', course.id);
+  }
+
+  onAddItem(): void {
+    console.log('add item');
+  }
+
+  onLoadMore(): void {
+    console.log('load more');
+  }
 }

@@ -1,11 +1,11 @@
-import { Course } from './../../../shared/interfaces/course';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import {
   faCalendar,
   faClock,
   faPencilAlt,
   faTrash,
 } from '@fortawesome/free-solid-svg-icons';
+import { Course } from '@interfaces/course';
 
 @Component({
   selector: 'app-course-card',
@@ -13,12 +13,18 @@ import {
   styleUrls: ['./course-card.component.scss'],
 })
 export class CourseCardComponent {
+  @Output() delete = new EventEmitter<Course>();
+
   @Input() course: Course;
 
   editIcon = faPencilAlt;
   deleteIcon = faTrash;
   durationIcon = faClock;
   creationIcon = faCalendar;
+
+  get id(): string {
+    return this.course.id;
+  }
 
   get title(): string {
     return this.course.title;
@@ -34,5 +40,9 @@ export class CourseCardComponent {
 
   get creationTime(): Date {
     return this.course.creationTime;
+  }
+
+  deleteCard(): void {
+    this.delete.emit(this.course);
   }
 }

@@ -1,7 +1,7 @@
-import { FooterModule } from './../footer/footer.module';
-import { HeaderModule } from './../header/header.module';
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { FooterModule } from '@components/footer/footer.module';
+import { HeaderModule } from '@components/header/header.module';
 import { PageContainerComponent } from './page-container.component';
 
 @NgModule({
