@@ -1,0 +1,26 @@
+.search-container {
+  margin-top: 1rem;
+  margin-left: 5rem;
+  height: 2.25rem;
+
+  & input {
+    height: 100%;
+    width: 15rem;
+    border: 1px solid #b7b9c2;
+    border-radius: 3px;
+    padding: 0.5rem;
+  }
+  & button {
+    margin-left: 0.5rem;
+    border-radius: 3px;
+    background: #67a300;
+    width: 4.5rem;
+    height: 100%;
+    border: none;
+    color: white;
+  }
+  & button:hover {
+    cursor: pointer;
+    background: #568800;
+  }
+}

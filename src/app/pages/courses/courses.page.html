@@ -1,14 +1,15 @@
-<app-page-container>
-  <app-breadcrumbs></app-breadcrumbs>
-  <div class="search-container">
-    <input type="text" id="courseSearch" />
-    <button>Search</button>
-  </div>
-  <div class="add-course-container">
-    <button><fa-icon [icon]="addCourseIcon"></fa-icon>Add course</button>
-  </div>
-  <app-courses-container [courses]="courses"></app-courses-container>
-  <div class="load-more">
-    <button class="load-more-button">Load more</button>
-  </div>
-</app-page-container>
+<app-search-input [formControl]="searchControl"></app-search-input>
+<div class="add-course-container">
+  <button (click)="onAddItem()">
+    <fa-icon [icon]="addCourseIcon"></fa-icon>Add course
+  </button>
+</div>
+<ng-container *ngFor="let course of courses$ | async">
+  <app-course-card
+    [course]="course"
+    (delete)="onCardDelete($event)"
+  ></app-course-card>
+</ng-container>
+<div class="load-more">
+  <button class="load-more-button" (click)="onLoadMore()">Load more</button>
+</div>

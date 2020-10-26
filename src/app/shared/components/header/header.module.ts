@@ -1,8 +1,8 @@
-import { LogoModule } from './../logo/logo.module';
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HeaderComponent } from './header.component';
+import { NgModule } from '@angular/core';
+import { LogoModule } from '@components/logo/logo.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { HeaderComponent } from './header.component';
 
 @NgModule({
   declarations: [HeaderComponent],
