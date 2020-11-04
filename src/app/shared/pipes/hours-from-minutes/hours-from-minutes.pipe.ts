@@ -9,7 +9,6 @@ export class HoursFromMinutesPipe implements PipeTransform {
       return '0 h 0 mins';
     }
     const hours = Math.floor(value / 60);
-    console.log('hours ', hours);
 
     const mins = value - hours * 60;
     return `${hours} h ${mins} mins`;
