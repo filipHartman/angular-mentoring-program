@@ -1,25 +1,29 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Component } from '@angular/core';
+import { render, RenderResult } from '@testing-library/angular';
+import { PageContainerModule } from './page-container.module';
 
-import { PageContainerComponent } from './page-container.component';
+@Component({
+  selector: 'app-test-host',
+  template: `
+    <app-page-container>
+      <div>This is the page content</div>
+    </app-page-container>
+  `,
+})
+export class TestHostComponent {}
 
 describe('PageContainerComponent', () => {
-  let component: PageContainerComponent;
-  let fixture: ComponentFixture<PageContainerComponent>;
+  let component: RenderResult<TestHostComponent, TestHostComponent>;
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ PageContainerComponent ]
-    })
-    .compileComponents();
+    component = await render(TestHostComponent, {
+      declarations: [TestHostComponent],
+      imports: [PageContainerModule],
+    });
   });
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(PageContainerComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('should display page content', () => {
+    const { getByText } = component;
+    expect(getByText('This is the page content')).toBeTruthy();
   });
 });
