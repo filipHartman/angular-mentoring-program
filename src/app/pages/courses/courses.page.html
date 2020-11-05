@@ -1,15 +1,27 @@
-<app-search-input [formControl]="searchControl"></app-search-input>
+<app-search-input
+  [formControl]="searchControl"
+  (search)="onSearchClick()"
+></app-search-input>
 <div class="add-course-container">
   <button (click)="onAddItem()">
     <fa-icon [icon]="addCourseIcon"></fa-icon>Add course
   </button>
 </div>
-<ng-container *ngFor="let course of courses$ | async">
-  <app-course-card
-    [course]="course"
-    (delete)="onCardDelete($event)"
-  ></app-course-card>
+<ng-container *ngIf="courses$ | async as courses; else noCourses">
+  <ng-container *ngIf="courses.length !== 0; else noCourses">
+    <ng-container *ngFor="let course of courses | appOrderBy">
+      <app-course-card
+        [course]="course"
+        (delete)="onCardDelete($event)"
+      ></app-course-card>
+    </ng-container>
+  </ng-container>
 </ng-container>
+
+<ng-template #noCourses>
+  <div class="no-course">No data. Feel free to add new course</div>
+</ng-template>
+
 <div class="load-more">
   <button class="load-more-button" (click)="onLoadMore()">Load more</button>
 </div>

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Course } from '../interfaces/course';
-import { exampleCoursesList } from './../testUtils/index';
+import { exampleCoursesList } from '../testUtils';
 
 @Injectable({
   providedIn: 'root',
@@ -16,6 +16,7 @@ export class CoursesService {
   private setCourses(): BehaviorSubject<Course[]> {
     return new BehaviorSubject<Course[]>(exampleCoursesList);
   }
+
   get courses$(): Observable<Course[]> {
     return this.courses.asObservable();
   }

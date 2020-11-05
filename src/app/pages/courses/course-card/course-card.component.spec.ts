@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { Course } from '@interfaces/course';
-import { HoursFromMinutesModule } from '@pipes/hours-from-minutes/hours-from-minutes.module';
+import { PipesModule } from '@pipes/pipes.module';
 import { render, RenderResult } from '@testing-library/angular';
 import { exampleCourse } from './../../../shared/testUtils/index';
 import { CourseCardComponent } from './course-card.component';
@@ -21,7 +21,7 @@ describe('CourseCardComponent', () => {
 
   beforeEach(async () => {
     component = await render(TestHostComponent, {
-      imports: [HoursFromMinutesModule, FontAwesomeModule],
+      imports: [FontAwesomeModule, PipesModule],
       declarations: [TestHostComponent, CourseCardComponent],
     });
   });

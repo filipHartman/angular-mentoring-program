@@ -1,4 +1,4 @@
-import { Component, forwardRef } from '@angular/core';
+import { Component, EventEmitter, forwardRef, Output } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
@@ -14,6 +14,8 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
   ],
 })
 export class SearchInputComponent implements ControlValueAccessor {
+  @Output() search = new EventEmitter<boolean>();
+
   public value = '';
   public disabled: boolean;
 
@@ -33,5 +35,9 @@ export class SearchInputComponent implements ControlValueAccessor {
 
   setDisabledState(isDisabled: boolean): void {
     this.disabled = isDisabled;
+  }
+
+  onSearchClick(): void {
+    this.search.emit(true);
   }
 }
