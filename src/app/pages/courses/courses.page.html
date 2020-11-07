@@ -8,13 +8,11 @@
   </button>
 </div>
 <ng-container *ngIf="courses$ | async as courses; else noCourses">
-  <ng-container *ngIf="courses.length !== 0; else noCourses">
-    <ng-container *ngFor="let course of courses | appOrderBy">
-      <app-course-card
-        [course]="course"
-        (delete)="onCardDelete($event)"
-      ></app-course-card>
-    </ng-container>
+  <ng-container *ngFor="let course of courses | appOrderBy">
+    <app-course-card
+      [course]="course"
+      (delete)="onCardDelete($event)"
+    ></app-course-card>
   </ng-container>
 </ng-container>
 
