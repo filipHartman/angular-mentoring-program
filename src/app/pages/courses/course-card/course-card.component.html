@@ -1,6 +1,14 @@
-<div class="card">
+<div
+  [appPlateBorder]="creationTime"
+  class="card"
+  [ngClass]="{ 'top-rated-bg': topRated }"
+>
   <header class="header">
-    <h2>{{ title }}</h2>
+    <h2>
+      {{ title }}
+      <fa-icon *ngIf="topRated" class="star" [icon]="starIcon"></fa-icon>
+    </h2>
+
     <div class="timeInfo">
       <span class="durationIcon"
         ><fa-icon [icon]="durationIcon"></fa-icon>

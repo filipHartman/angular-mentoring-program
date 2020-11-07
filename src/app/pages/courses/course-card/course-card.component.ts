@@ -3,6 +3,7 @@ import {
   faCalendar,
   faClock,
   faPencilAlt,
+  faStar,
   faTrash,
 } from '@fortawesome/free-solid-svg-icons';
 import { Course } from '@interfaces/course';
@@ -21,6 +22,7 @@ export class CourseCardComponent {
   deleteIcon = faTrash;
   durationIcon = faClock;
   creationIcon = faCalendar;
+  starIcon = faStar;
 
   get id(): string {
     return this.course.id;
@@ -40,6 +42,10 @@ export class CourseCardComponent {
 
   get creationTime(): Date {
     return this.course.creationTime;
+  }
+
+  get topRated(): boolean {
+    return this.course.topRated;
   }
 
   deleteCard(): void {
