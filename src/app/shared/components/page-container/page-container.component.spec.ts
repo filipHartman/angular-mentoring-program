@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { RouterTestingModule } from '@angular/router/testing';
 import { render, RenderResult } from '@testing-library/angular';
 import { PageContainerModule } from './page-container.module';
 
@@ -18,7 +19,7 @@ describe('PageContainerComponent', () => {
   beforeEach(async () => {
     component = await render(TestHostComponent, {
       declarations: [TestHostComponent],
-      imports: [PageContainerModule],
+      imports: [PageContainerModule, RouterTestingModule],
     });
   });
 

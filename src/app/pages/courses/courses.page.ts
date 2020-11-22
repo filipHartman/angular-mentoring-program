@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { ModalCardComponent } from '@components/modal-card/modal-card.component';
 import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import { Course } from '@interfaces/course';
-import { CoursesService } from '@services/courses.service';
+import { CoursesService } from '@services/courses/courses.service';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { FilterPipe } from './../../shared/pipes/filter/filter.pipe';
@@ -19,7 +21,10 @@ export class CoursesComponent {
 
   searchControl = new FormControl('');
 
-  constructor(private readonly coursesService: CoursesService) {}
+  constructor(
+    private readonly coursesService: CoursesService,
+    public dialog: MatDialog,
+  ) {}
 
   get courses$(): Observable<Course[]> {
     return this._courses$;
@@ -28,11 +33,16 @@ export class CoursesComponent {
   addCourseIcon = faPlusCircle;
 
   onCardDelete(course: Course): void {
-    console.log('delete ', course.id);
+    const dialogRef = this.dialog.open(ModalCardComponent);
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.coursesService.removeItem(course);
+      }
+    });
   }
 
   onAddItem(): void {
-    console.log('add item');
+    this.coursesService.createCourse();
   }
 
   onLoadMore(): void {
