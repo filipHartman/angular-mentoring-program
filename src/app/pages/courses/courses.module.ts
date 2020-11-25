@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ModalCardModule } from '@components/modal-card/modal-card.module';
 import { PageContainerModule } from '@components/page-container/page-container.module';
 import { SearchInputModule } from '@components/search-input/search-input.module';
 import { DirectivesModule } from '@directives/directives.module';
@@ -20,6 +22,8 @@ import { CoursesComponent } from './courses.page';
     PipesModule,
     ReactiveFormsModule,
     DirectivesModule,
+    ModalCardModule,
+    MatDialogModule,
   ],
 })
 export class CoursesModule {}

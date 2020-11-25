@@ -1,6 +1,6 @@
+import { CoursesService } from '@services/courses/courses.service';
 import { render, RenderResult } from '@testing-library/angular';
 import { of } from 'rxjs';
-import { CoursesService } from './../../shared/services/courses.service';
 import { exampleCourse } from './../../shared/testUtils/index';
 import { CoursesModule } from './courses.module';
 import { CoursesComponent } from './courses.page';

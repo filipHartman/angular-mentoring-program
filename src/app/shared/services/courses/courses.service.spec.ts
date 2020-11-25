@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { cold } from 'jasmine-marbles';
-import { exampleCoursesList } from './../testUtils/index';
+import { exampleCoursesList } from '../../testUtils/index';
 import { CoursesService } from './courses.service';
 
 describe('CoursesService', () => {

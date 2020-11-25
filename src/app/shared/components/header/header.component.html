@@ -1,10 +1,10 @@
 <header class="header">
   <app-logo class="logo"></app-logo>
-  <div class="buttons">
+  <div *ngIf="isAuthenticated" class="buttons">
     <button class="user">
       <fa-icon [icon]="userIcon"></fa-icon> User login
     </button>
-    <button class="logout">
+    <button class="logout" (click)="logout()">
       <fa-icon [icon]="logOffIcon"></fa-icon> Log off
     </button>
   </div>
