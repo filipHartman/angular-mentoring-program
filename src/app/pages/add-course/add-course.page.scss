@@ -1,0 +1,56 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 4rem;
+}
+
+.row {
+  display: flex;
+  flex-direction: column;
+  margin: 0.5rem 0;
+
+  & label {
+    font-size: 1.25rem;
+    font-weight: 700;
+  }
+  & input textarea {
+    border: 1px solid #456b02;
+    font-size: 1.5rem;
+  }
+
+  & input {
+    height: 2rem;
+  }
+}
+
+.duration {
+  display: flex;
+  align-items: center;
+  & span {
+    margin-left: 1rem;
+  }
+}
+.short-input {
+  width: 17rem;
+}
+
+.buttons {
+  margin-top: 1rem;
+  & button {
+    border-radius: 3px;
+    width: 8rem;
+    height: 2.5rem;
+    border: none;
+  }
+
+  & .submit {
+    background: #67a300;
+    color: white;
+  }
+
+  & .cancel {
+    margin-left: 1rem;
+    background-color: #ce0707;
+    color: white;
+  }
+}
