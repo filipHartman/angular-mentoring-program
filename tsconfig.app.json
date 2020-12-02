@@ -10,7 +10,8 @@
       "@interfaces/*": ["app/shared/interfaces/*"],
       "@pipes/*": ["app/shared/pipes/*"],
       "@services/*": ["app/shared/services/*"],
-      "@directives/*": ["app/shared/directives/*"]
+      "@directives/*": ["app/shared/directives/*"],
+      "@enums/*": ["app/shared/enums/*"]
     }
   },
   "files": ["src/main.ts", "src/polyfills.ts"],

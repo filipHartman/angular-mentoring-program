@@ -2,6 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
+import { SiteMap } from '@enums/site-map.enum';
 import { Course } from '@interfaces/course';
 import { CoursesService } from '@services/courses/courses.service';
 import { render, RenderResult } from '@testing-library/angular';
@@ -92,6 +93,6 @@ describe('CoursesComponent', () => {
     const router = TestBed.inject(Router);
     spyOn(router, 'navigateByUrl');
     click(getByText('Add course'));
-    expect(router.navigateByUrl).toHaveBeenCalledWith('add-course');
+    expect(router.navigateByUrl).toHaveBeenCalledWith(SiteMap.NEW_COURSE);
   });
 });

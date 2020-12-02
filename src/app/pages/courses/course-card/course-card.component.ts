@@ -22,6 +22,7 @@ import { Course } from '@interfaces/course';
 })
 export class CourseCardComponent {
   @Output() delete = new EventEmitter<Course>();
+  @Output() edit = new EventEmitter<Course>();
 
   @Input() course: Course;
 
@@ -57,5 +58,9 @@ export class CourseCardComponent {
 
   deleteCard(): void {
     this.delete.emit(this.course);
+  }
+
+  editCard(): void {
+    this.edit.emit(this.course);
   }
 }
