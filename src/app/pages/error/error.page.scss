@@ -1,0 +1,35 @@
+:host {
+  display: flex;
+  height: 100%;
+  height: calc(100% - 5rem);
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: column;
+  background-color: white;
+  padding: 1rem 2rem;
+  width: 29rem;
+  height: 18rem;
+  border-radius: 8px;
+  box-shadow: 0px 0px 6px 4px rgba(139, 138, 138, 0.3);
+  & h2 {
+    font-size: 1.5rem;
+  }
+  & button {
+    border: none;
+    background-color: #67a300;
+    color: white;
+    margin-top: 1rem;
+    padding: 0.5rem;
+  }
+
+  & button:hover {
+    background-color: #456b02;
+    cursor: pointer;
+  }
+}

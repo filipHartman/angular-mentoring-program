@@ -1,22 +1,15 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { RouterTestingModule } from '@angular/router/testing';
+import { render, RenderResult } from '@testing-library/angular';
 import { BreadcrumbsComponent } from './breadcrumbs.component';
+import { BreadcrumbsModule } from './breadcrumbs.module';
 
 describe('BreadcrumbsComponent', () => {
-  let component: BreadcrumbsComponent;
-  let fixture: ComponentFixture<BreadcrumbsComponent>;
+  let component: RenderResult<BreadcrumbsComponent, BreadcrumbsComponent>;
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ BreadcrumbsComponent ]
-    })
-    .compileComponents();
-  });
-
-  beforeEach(() => {
-    fixture = TestBed.createComponent(BreadcrumbsComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    component = await render(BreadcrumbsComponent, {
+      imports: [BreadcrumbsModule, RouterTestingModule],
+    });
   });
 
   it('should create', () => {

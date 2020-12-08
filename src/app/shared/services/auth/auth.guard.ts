@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
+import { SiteMap } from '@enums/site-map.enum';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -15,7 +16,7 @@ export class AuthGuard implements CanActivate {
     if (this.auth.isAuthenticated()) {
       return true;
     }
-    this.router.navigateByUrl('login');
+    this.router.navigateByUrl(SiteMap.LOGIN);
     return false;
   }
 }

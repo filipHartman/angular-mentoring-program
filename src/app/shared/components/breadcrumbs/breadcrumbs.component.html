@@ -1,2 +1,5 @@
-<!-- This is only temporary solution before introducing routing to app -->
-<span>Courses</span>
+<ng-container *ngFor="let item of items$ | async; let first = first">
+  <span [ngClass]="{ breadcrumb: !first }" (click)="first && onClick()">
+    {{ item }}
+  </span>
+</ng-container>

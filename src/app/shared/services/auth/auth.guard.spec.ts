@@ -1,5 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
+import { SiteMap } from '@enums/site-map.enum';
 import { routerMock } from './../../testUtils/router';
 import { AuthGuard } from './auth.guard';
 import { AuthService } from './auth.service';
@@ -25,7 +26,7 @@ describe('AuthGuard', () => {
     spyOn(authService, 'isAuthenticated').and.returnValue(false);
     spyOn(router, 'navigateByUrl');
     expect(guard.canActivate()).toBe(false);
-    expect(router.navigateByUrl).toHaveBeenCalledWith('login');
+    expect(router.navigateByUrl).toHaveBeenCalledWith(SiteMap.LOGIN);
   });
 
   it('should allow route activation if user is authenticated', () => {

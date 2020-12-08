@@ -23,7 +23,9 @@
   <section class="content">
     <p class="description">{{ description }}</p>
     <div class="buttons">
-      <button><fa-icon [icon]="editIcon"></fa-icon> Edit</button>
+      <button (click)="editCard()">
+        <fa-icon [icon]="editIcon"></fa-icon> Edit
+      </button>
       <button (click)="deleteCard()">
         <fa-icon [icon]="deleteIcon"></fa-icon> Delete
       </button>

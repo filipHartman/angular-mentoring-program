@@ -3,6 +3,7 @@ import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ModalCardComponent } from '@components/modal-card/modal-card.component';
+import { SiteMap } from '@enums/site-map.enum';
 import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import { Course } from '@interfaces/course';
 import { CoursesService } from '@services/courses/courses.service';
@@ -43,8 +44,14 @@ export class CoursesComponent {
     });
   }
 
+  onCardEdit(course: Course): void {
+    this.router.navigateByUrl(`${SiteMap.COURSES}/${course.id}`, {
+      state: { id: course.id },
+    });
+  }
+
   onAddItem(): void {
-    this.router.navigateByUrl('add-course');
+    this.router.navigateByUrl(SiteMap.NEW_COURSE);
   }
 
   onLoadMore(): void {

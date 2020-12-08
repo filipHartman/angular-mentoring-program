@@ -37,7 +37,12 @@ export class CoursesService {
     );
   }
 
-  updateItem(course: Course): void {}
+  updateItem(course: Course): void {
+    const coursesArr = [...this.courses.getValue()];
+    const index = coursesArr.findIndex((c) => c.id === course.id);
+    coursesArr[index] = course;
+    this.courses.next(coursesArr);
+  }
 
   removeItem(course: Course): void {
     const coursesArr = [...this.courses.getValue()];
