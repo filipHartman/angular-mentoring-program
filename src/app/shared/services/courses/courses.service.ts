@@ -9,13 +9,14 @@ import { map } from 'rxjs/operators';
 })
 export class CoursesService {
   private courses: BehaviorSubject<Course[]>;
+  private currentIdNumber = 4;
 
   constructor() {
     this.courses = this.setCourses();
   }
 
   private setCourses(): BehaviorSubject<Course[]> {
-    return new BehaviorSubject<Course[]>(exampleCoursesList);
+    return new BehaviorSubject<Course[]>([...exampleCoursesList]);
   }
 
   get courses$(): Observable<Course[]> {
@@ -24,7 +25,11 @@ export class CoursesService {
       .pipe(map((courses) => (courses.length !== 0 ? courses : null)));
   }
 
-  createCourse(): void {}
+  createCourse(newCourse: Course): void {
+    const arr = this.courses.getValue();
+    arr.push(newCourse);
+    this.courses.next(arr);
+  }
 
   getItemById(id: string): Observable<Course> {
     return this.courses$.pipe(
@@ -39,5 +44,9 @@ export class CoursesService {
     const index = coursesArr.findIndex((c) => c.id === course.id);
     coursesArr.splice(index, 1);
     this.courses.next(coursesArr);
+  }
+
+  getCurrentId(): string {
+    return `course-${this.currentIdNumber++}`;
   }
 }

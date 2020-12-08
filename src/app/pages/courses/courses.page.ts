@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { ModalCardComponent } from '@components/modal-card/modal-card.component';
 import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import { Course } from '@interfaces/course';
@@ -23,7 +24,8 @@ export class CoursesComponent {
 
   constructor(
     private readonly coursesService: CoursesService,
-    public dialog: MatDialog,
+    private readonly router: Router,
+    private readonly dialog: MatDialog,
   ) {}
 
   get courses$(): Observable<Course[]> {
@@ -42,7 +44,7 @@ export class CoursesComponent {
   }
 
   onAddItem(): void {
-    this.coursesService.createCourse();
+    this.router.navigateByUrl('add-course');
   }
 
   onLoadMore(): void {
