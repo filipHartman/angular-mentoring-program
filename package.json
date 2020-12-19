@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "start-aot": "ng serve --aot",
+    "start-server": "cd ./src/server/ & node index",
     "build": "ng build",
     "test": "ng test --watch --codeCoverage",
     "lint": "ng lint",
@@ -28,7 +29,12 @@
     "date-fns": "^2.16.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
-    "zone.js": "~0.10.2"
+    "zone.js": "~0.10.2",
+    "express": "^4.14.1",
+    "json-server": "^0.9.4",
+    "lodash": "^4.17.4",
+    "moment": "^2.24.0",
+    "momentjs": "^2.0.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.1001.4",
