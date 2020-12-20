@@ -15,6 +15,14 @@ describe('AuthGuard', () => {
           provide: Router,
           useValue: routerMock,
         },
+        {
+          provide: AuthService,
+          useValue: {
+            isAuthenticated() {
+              return true;
+            },
+          },
+        },
       ],
     });
     guard = TestBed.inject(AuthGuard);

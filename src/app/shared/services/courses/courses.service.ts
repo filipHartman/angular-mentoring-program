@@ -1,57 +1,70 @@
 import { Injectable } from '@angular/core';
 import { Course } from '@interfaces/course';
-import { exampleCoursesList } from 'app/shared/testUtils';
+import { ApiService } from '@services/api/api.service';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { generate } from 'shortid';
+import { OrderByPipe } from './../../pipes/order-by/order-by.pipe';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CoursesService {
-  private courses: BehaviorSubject<Course[]>;
-  private currentIdNumber = 4;
+  private courses: BehaviorSubject<Course[]> = new BehaviorSubject([]);
+  private order = new OrderByPipe();
 
-  constructor() {
-    this.courses = this.setCourses();
+  private numberOfCourses = 5;
+  private paginationStep = 5;
+
+  constructor(private readonly api: ApiService) {
+    this.getCoursesFromBE();
   }
 
-  private setCourses(): BehaviorSubject<Course[]> {
-    return new BehaviorSubject<Course[]>([...exampleCoursesList]);
+  private getCoursesFromBE(): void {
+    this.api.getAllCourses(this.numberOfCourses).subscribe({
+      next: (courses) => this.courses.next(courses),
+    });
   }
 
   get courses$(): Observable<Course[]> {
     return this.courses
       .asObservable()
-      .pipe(map((courses) => (courses.length !== 0 ? courses : null)));
+      .pipe(
+        map((courses) =>
+          courses.length !== 0 ? this.order.transform(courses) : null,
+        ),
+      );
   }
 
   createCourse(newCourse: Course): void {
-    const arr = this.courses.getValue();
-    arr.push(newCourse);
-    this.courses.next(arr);
+    this.requestWithUpdateCourses(() => this.api.createCourse(newCourse));
   }
 
   getItemById(id: string): Observable<Course> {
-    return this.courses$.pipe(
-      map((courses) => courses.find((course) => course.id === id)),
-    );
+    return this.api.getCourseById(id);
   }
 
   updateItem(course: Course): void {
-    const coursesArr = [...this.courses.getValue()];
-    const index = coursesArr.findIndex((c) => c.id === course.id);
-    coursesArr[index] = course;
-    this.courses.next(coursesArr);
+    this.requestWithUpdateCourses(() => this.api.updateCourse(course));
   }
 
   removeItem(course: Course): void {
-    const coursesArr = [...this.courses.getValue()];
-    const index = coursesArr.findIndex((c) => c.id === course.id);
-    coursesArr.splice(index, 1);
-    this.courses.next(coursesArr);
+    this.requestWithUpdateCourses(() => this.api.deleteCourse(course));
   }
 
   getCurrentId(): string {
-    return `course-${this.currentIdNumber++}`;
+    return generate();
+  }
+
+  loadMoreCourses(): void {
+    this.requestWithUpdateCourses(
+      () => (this.numberOfCourses += this.paginationStep),
+    );
+  }
+
+  private requestWithUpdateCourses(request: () => void): void {
+    request();
+    // I needed to add setTimeout because sometimes request for getting courses finishes before the request
+    setTimeout(() => this.getCoursesFromBE(), 0);
   }
 }

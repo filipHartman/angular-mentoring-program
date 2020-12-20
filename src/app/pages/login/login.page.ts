@@ -7,7 +7,7 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '@services/auth/auth.service';
-import { exampleLogin, exampleUser } from 'app/shared/testUtils';
+import { SiteMap } from './../../shared/enums/site-map.enum';
 
 @Component({
   selector: 'app-login',
@@ -24,15 +24,17 @@ export class LoginComponent {
   ) {}
 
   onSubmit(): void {
-    if (
-      this.email.value === exampleLogin.email &&
-      this.password.value === exampleLogin.password
-    ) {
-      this.auth.login(exampleUser);
-      this.router.navigateByUrl('courses');
-    } else {
-      alert('Wrong credentials!!! Try again!!!');
-    }
+    this.auth
+      .login({
+        login: this.email.value,
+        password: this.password.value,
+      })
+      .subscribe(
+        () => {
+          this.router.navigateByUrl(SiteMap.COURSES);
+        },
+        (err) => console.error(err),
+      );
   }
 
   get email(): FormControl {

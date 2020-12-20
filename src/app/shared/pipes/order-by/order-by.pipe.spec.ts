@@ -5,24 +5,24 @@ import { OrderByPipe } from './order-by.pipe';
 const courses: Course[] = [
   {
     id: 'course1',
-    title: 'Course 1. Basics of HTML',
+    name: 'Course 1. Basics of HTML',
     description: 'Description of Course 1',
-    duration: 90,
-    creationTime: twoWeeksBefore,
+    length: 90,
+    date: twoWeeksBefore,
   },
   {
     id: 'course2',
-    title: 'Course 2. Basics of CSS',
+    name: 'Course 2. Basics of CSS',
     description: 'Description of Course 2',
-    duration: 90,
-    creationTime: futureDate,
+    length: 90,
+    date: futureDate,
   },
   {
     id: 'course3',
-    title: 'Course 3. Advanced JS',
+    name: 'Course 3. Advanced JS',
     description: 'Description of Course 3',
-    duration: 90,
-    creationTime: today,
+    length: 90,
+    date: today,
   },
 ];
 describe('OrderByPipe', () => {

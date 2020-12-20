@@ -37,7 +37,7 @@ export class CourseCardComponent {
   }
 
   get title(): string {
-    return this.course.title;
+    return this.course.name;
   }
 
   get description(): string {
@@ -45,15 +45,15 @@ export class CourseCardComponent {
   }
 
   get duration(): number {
-    return this.course.duration;
+    return this.course.length;
   }
 
   get creationTime(): Date {
-    return this.course.creationTime;
+    return this.course.date;
   }
 
   get topRated(): boolean {
-    return this.course.topRated;
+    return this.course.isTopRated;
   }
 
   deleteCard(): void {

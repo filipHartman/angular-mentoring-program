@@ -1,16 +1,35 @@
 import { TestBed } from '@angular/core/testing';
 import { Course } from '@interfaces/course';
 import { cold } from 'jasmine-marbles';
+import { of } from 'rxjs';
 import { exampleCoursesList } from '../../testUtils/index';
+import { ApiService } from './../api/api.service';
 import { CoursesService } from './courses.service';
 
 const testCourses: Course[] = [...exampleCoursesList];
+
+const apiServiceMock = {
+  getAllCourses() {
+    return of(exampleCoursesList);
+  },
+  getCourseById() {},
+  createCourse() {},
+  updateCourse() {},
+  deleteCourse() {},
+};
 
 describe('CoursesService', () => {
   let service: CoursesService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      providers: [
+        {
+          provide: ApiService,
+          useValue: apiServiceMock,
+        },
+      ],
+    });
     service = TestBed.inject(CoursesService);
   });
 
@@ -21,10 +40,10 @@ describe('CoursesService', () => {
   it('should add new course', () => {
     const newCourse: Course = {
       id: service.getCurrentId(),
-      title: 'Angular routing',
+      name: 'Angular routing',
       description: 'Course about Angular routing',
-      creationTime: new Date(2020, 11, 29),
-      duration: 123,
+      date: new Date(2020, 11, 29),
+      length: 123,
     };
     service.createCourse(newCourse);
 

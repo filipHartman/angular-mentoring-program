@@ -1,11 +1,17 @@
 export interface User {
   id: string;
+  token: string;
+  name: NameModel;
+  login: string;
+  password: string;
+}
+
+export interface NameModel {
   firstName: string;
   lastName: string;
-  token?: string;
 }
 
 export interface LoginUser {
-  email: string;
+  login: string;
   password: string;
 }
