@@ -1,8 +1,9 @@
 <div class="search-container">
+  <label>Search</label>
   <input
+    #searchInput
     type="text"
     [value]="value"
     (change)="!disabled && onChanged && onChanged($event.target.value)"
   />
-  <button (click)="onSearchClick()">Search</button>
 </div>

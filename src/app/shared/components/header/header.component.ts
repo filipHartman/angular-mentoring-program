@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { faSignOutAlt, faUser } from '@fortawesome/free-solid-svg-icons';
-import { User } from '@interfaces/user';
+import { NameModel } from '@interfaces/user';
 import { AuthService } from '@services/auth/auth.service';
 
 @Component({
@@ -23,8 +23,8 @@ export class HeaderComponent {
     return this.auth.isAuthenticated();
   }
 
-  get user(): User {
-    return this.auth.getUserInfo();
+  get userName(): NameModel {
+    return this.auth.getUserInfo().name;
   }
 
   logout(): void {

@@ -48,8 +48,8 @@ export const exampleLogin: LoginUser = {
 export const exampleUser: User = {
   id: 'user1',
   name: {
-    firstName: 'Grzegorz',
-    lastName: 'Brzęczyszczykiewicz',
+    first: 'Grzegorz',
+    last: 'Brzęczyszczykiewicz',
   },
   login: 'admin',
   password: 'admin',

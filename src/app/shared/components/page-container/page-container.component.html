@@ -4,3 +4,6 @@
   <ng-content></ng-content>
 </div>
 <app-footer></app-footer>
+<div class="spinner-wrapper" *ngIf="showSpinner$ | async">
+  <app-spinner class="spinner"></app-spinner>
+</div>

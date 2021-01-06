@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 import { SiteMap } from '@enums/site-map.enum';
+import { Observable, of } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -12,11 +14,15 @@ export class AuthGuard implements CanActivate {
     private readonly router: Router,
   ) {}
 
-  canActivate(): boolean {
-    if (this.auth.isAuthenticated()) {
-      return true;
-    }
-    this.router.navigateByUrl(SiteMap.LOGIN);
-    return false;
+  canActivate(): Observable<boolean> {
+    return of(this.auth.isAuthenticated()).pipe(
+      map((isAuthenticated) => {
+        if (isAuthenticated) {
+          return true;
+        }
+        this.router.navigateByUrl(SiteMap.LOGIN);
+        return false;
+      }),
+    );
   }
 }
