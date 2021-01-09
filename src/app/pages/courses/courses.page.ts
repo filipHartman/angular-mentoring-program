@@ -8,8 +8,6 @@ import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import { Course } from '@interfaces/course';
 import { CoursesService } from '@services/courses/courses.service';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { FilterPipe } from './../../shared/pipes/filter/filter.pipe';
 
 @Component({
   selector: 'app-courses',
@@ -19,7 +17,6 @@ import { FilterPipe } from './../../shared/pipes/filter/filter.pipe';
 export class CoursesComponent {
   // tslint:disable-next-line: variable-name
   private _courses$ = this.coursesService.courses$;
-  private filterPipe = new FilterPipe();
 
   searchControl = new FormControl('');
 
@@ -56,16 +53,5 @@ export class CoursesComponent {
 
   onLoadMore(): void {
     this.coursesService.loadMoreCourses();
-  }
-
-  onSearchClick(): void {
-    const searchValue = this.searchControl.value;
-    if (!!searchValue) {
-      this._courses$ = this.coursesService.courses$.pipe(
-        map((course) => this.filterPipe.transform(course, searchValue)),
-      );
-    } else {
-      this._courses$ = this.coursesService.courses$;
-    }
   }
 }

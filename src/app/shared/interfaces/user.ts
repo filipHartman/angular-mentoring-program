@@ -7,8 +7,8 @@ export interface User {
 }
 
 export interface NameModel {
-  firstName: string;
-  lastName: string;
+  first: string;
+  last: string;
 }
 
 export interface LoginUser {

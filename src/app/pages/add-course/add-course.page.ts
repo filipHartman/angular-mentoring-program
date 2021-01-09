@@ -9,7 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { SiteMap } from '@enums/site-map.enum';
 import { Course } from '@interfaces/course';
 import { CoursesService } from '@services/courses/courses.service';
-import { format, parseISO } from 'date-fns';
+import { format } from 'date-fns';
 import { take } from 'rxjs/operators';
 
 @Component({
@@ -53,7 +53,7 @@ export class AddCourseComponent implements OnInit {
   updateFormWithCourseData(course: Course): void {
     this.title.setValue(course.name);
     this.description.setValue(course.description);
-    this.date.setValue(format(parseISO(course.date.toString()), 'yyyy-MM-dd'));
+    this.date.setValue(format(course.date.toString(), 'yyyy-MM-dd'));
     this.duration.setValue(course.length);
     this.addCourseForm.updateValueAndValidity();
   }

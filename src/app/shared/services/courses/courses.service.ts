@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Course } from '@interfaces/course';
+import { FilterPipe } from '@pipes/filter/filter.pipe';
+import { OrderByPipe } from '@pipes/order-by/order-by.pipe';
 import { ApiService } from '@services/api/api.service';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { generate } from 'shortid';
-import { OrderByPipe } from './../../pipes/order-by/order-by.pipe';
 
 @Injectable({
   providedIn: 'root',
@@ -12,6 +13,7 @@ import { OrderByPipe } from './../../pipes/order-by/order-by.pipe';
 export class CoursesService {
   private courses: BehaviorSubject<Course[]> = new BehaviorSubject([]);
   private order = new OrderByPipe();
+  private filterPipe = new FilterPipe();
 
   private numberOfCourses = 5;
   private paginationStep = 5;
@@ -20,7 +22,7 @@ export class CoursesService {
     this.getCoursesFromBE();
   }
 
-  private getCoursesFromBE(): void {
+  getCoursesFromBE(): void {
     this.api.getAllCourses(this.numberOfCourses).subscribe({
       next: (courses) => this.courses.next(courses),
     });
@@ -42,6 +44,14 @@ export class CoursesService {
 
   getItemById(id: string): Observable<Course> {
     return this.api.getCourseById(id);
+  }
+
+  searchCoursesByText(text: string): void {
+    this.api.getAllCourses(this.numberOfCourses).subscribe((coursesFromBe) => {
+      if (!!text) {
+        this.courses.next(this.filterPipe.transform(coursesFromBe, text));
+      }
+    });
   }
 
   updateItem(course: Course): void {
