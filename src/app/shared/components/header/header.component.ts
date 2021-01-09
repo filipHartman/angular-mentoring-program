@@ -12,6 +12,7 @@ import { AuthService } from '@services/auth/auth.service';
 export class HeaderComponent {
   userIcon = faUser;
   logOffIcon = faSignOutAlt;
+  userInfo: unknown;
 
   constructor(
     private readonly auth: AuthService,

@@ -25,17 +25,17 @@ describe('AddCourseComponent', () => {
     spyOn(courseService, 'getCurrentId').and.returnValue('course-1');
     const date = '2020-09-21';
 
-    type(getByLabelText('Title'), exampleCourse.title);
+    type(getByLabelText('Title'), exampleCourse.name);
     type(getByLabelText('Description'), exampleCourse.description);
-    type(getByLabelText('Duration'), exampleCourse.duration);
+    type(getByLabelText('Duration'), exampleCourse.length);
     type(getByLabelText('Creation date'), date);
     click(getByText('Submit'));
     expect(courseService.createCourse).toHaveBeenCalledWith({
       id: 'course-1',
-      title: exampleCourse.title,
+      name: exampleCourse.name,
       description: exampleCourse.description,
-      duration: exampleCourse.duration,
-      creationTime: new Date(date),
+      length: exampleCourse.length,
+      date: new Date(date),
     } as Course);
     expect(router.navigateByUrl).toHaveBeenCalledWith('courses');
   });

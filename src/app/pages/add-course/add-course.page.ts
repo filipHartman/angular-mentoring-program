@@ -9,7 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { SiteMap } from '@enums/site-map.enum';
 import { Course } from '@interfaces/course';
 import { CoursesService } from '@services/courses/courses.service';
-import { format } from 'date-fns';
+import { format, parseISO } from 'date-fns';
 import { take } from 'rxjs/operators';
 
 @Component({
@@ -26,7 +26,9 @@ export class AddCourseComponent implements OnInit {
     private readonly router: Router,
     private readonly coursesService: CoursesService,
     private readonly route: ActivatedRoute,
-  ) {}
+  ) {
+    this.addCourseForm = this.initializeForm();
+  }
 
   ngOnInit(): void {
     this.courseId = this.route.snapshot.paramMap.get('id');
@@ -34,30 +36,26 @@ export class AddCourseComponent implements OnInit {
       this.coursesService
         .getItemById(this.courseId)
         .pipe(take(1))
-        .subscribe(
-          (course: Course) => (this.addCourseForm = this.createForm(course)),
-        );
-    } else {
-      this.addCourseForm = this.createForm();
+        .subscribe((course: Course) => {
+          this.updateFormWithCourseData(course);
+        });
     }
   }
 
-  createForm(course: Course = null): FormGroup {
+  private initializeForm(): FormGroup {
     return this.fb.group({
-      title: new FormControl(course ? course.title : '', Validators.required),
-      description: new FormControl(
-        course ? course.description : '',
-        Validators.required,
-      ),
-      date: new FormControl(
-        course ? format(course.creationTime, 'yyyy-MM-dd') : '',
-        Validators.required,
-      ),
-      duration: new FormControl(
-        course ? course.duration : '',
-        Validators.required,
-      ),
+      title: new FormControl('', Validators.required),
+      description: new FormControl('', Validators.required),
+      date: new FormControl('', Validators.required),
+      duration: new FormControl('', Validators.required),
     });
+  }
+  updateFormWithCourseData(course: Course): void {
+    this.title.setValue(course.name);
+    this.description.setValue(course.description);
+    this.date.setValue(format(parseISO(course.date.toString()), 'yyyy-MM-dd'));
+    this.duration.setValue(course.length);
+    this.addCourseForm.updateValueAndValidity();
   }
 
   get title(): FormControl {
@@ -98,10 +96,10 @@ export class AddCourseComponent implements OnInit {
   private prepareCourseForSubmit(id: string): Course {
     return {
       id,
-      title: this.title.value,
+      name: this.title.value,
       description: this.description.value,
-      duration: this.duration.value,
-      creationTime: new Date(this.date.value),
+      length: this.duration.value,
+      date: new Date(this.date.value),
     };
   }
 }

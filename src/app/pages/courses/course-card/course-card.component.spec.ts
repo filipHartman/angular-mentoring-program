@@ -28,7 +28,7 @@ describe('CourseCardComponent', () => {
 
   it('should show the title of the course', () => {
     const { getByText } = component;
-    expect(getByText(exampleCourse.title)).toBeTruthy();
+    expect(getByText(exampleCourse.name)).toBeTruthy();
   });
 
   it('should show the description of the course', () => {

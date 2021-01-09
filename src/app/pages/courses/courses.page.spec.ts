@@ -48,7 +48,7 @@ describe('CoursesComponent', () => {
 
   it('should show title of the provided course', () => {
     const { getByText } = component;
-    expect(getByText(exampleCourse.title)).toBeTruthy();
+    expect(getByText(exampleCourse.name)).toBeTruthy();
   });
 
   it('should show delete modal after clicking delete button', () => {

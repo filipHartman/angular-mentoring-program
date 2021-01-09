@@ -55,7 +55,7 @@ export class CoursesComponent {
   }
 
   onLoadMore(): void {
-    console.log('load more');
+    this.coursesService.loadMoreCourses();
   }
 
   onSearchClick(): void {

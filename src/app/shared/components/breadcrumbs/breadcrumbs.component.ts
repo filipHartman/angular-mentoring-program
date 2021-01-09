@@ -27,7 +27,7 @@ export class BreadcrumbsComponent implements OnInit {
         if (!!id) {
           return this.courses
             .getItemById(id)
-            .pipe(map((course) => [items[0], course.title]));
+            .pipe(map((course) => [items[0], course.name]));
         }
         return of(items);
       }),
