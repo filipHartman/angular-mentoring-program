@@ -21,15 +21,11 @@ export class ApiService {
   constructor(private readonly http: HttpClient) {}
 
   authenticateUser(user: LoginUser): Observable<TokenResponse> {
-    return this.http
-      .post<TokenResponse>(this.AUTH_URL.login, user)
-      .pipe(catchError(this.handleError));
+    return this.http.post<TokenResponse>(this.AUTH_URL.login, user);
   }
 
   getCurrentUser(token: TokenResponse): Observable<User> {
-    return this.http
-      .post<User>(this.AUTH_URL.userInfo, token)
-      .pipe(catchError(this.handleError));
+    return this.http.post<User>(this.AUTH_URL.userInfo, token);
   }
 
   getAllCourses(numberOfCourses: number = 5): Observable<Course[]> {

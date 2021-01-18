@@ -1,6 +1,6 @@
 <app-header></app-header>
 <div class="content">
-  <app-breadcrumbs *ngIf="isAuthenticated"></app-breadcrumbs>
+  <app-breadcrumbs *ngIf="isAuthenticated$ | async"></app-breadcrumbs>
   <ng-content></ng-content>
 </div>
 <app-footer></app-footer>
