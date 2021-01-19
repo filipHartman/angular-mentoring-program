@@ -13,24 +13,19 @@
       ></textarea>
     </div>
     <div class="row">
-      <label for="date">Creation date</label>
-      <input class="short-input" type="date" id="date" formControlName="date" />
+      <app-datepicker [formControl]="date"></app-datepicker>
     </div>
     <div class="row">
-      <label for="duration">Duration</label>
-      <div class="duration">
-        <input
-          class="short-input"
-          type="number"
-          min="0"
-          id="duration"
-          formControlName="duration"
-        />
-        <span>{{duration.value | hoursFromMinutes}}</span>
-      </div>
+      <app-duration-input [formControl]="duration"></app-duration-input>
     </div>
     <div class="buttons">
-      <button class="submit">Submit</button>
+      <button
+        [ngClass]="{disabled: addCourseForm.invalid}"
+        class="submit"
+        [disabled]="addCourseForm.invalid"
+      >
+        Submit
+      </button>
       <button class="cancel" (click)="onCancel()">Cancel</button>
     </div>
   </form>

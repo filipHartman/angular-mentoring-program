@@ -1,0 +1,12 @@
+<label for="duration">Duration</label>
+<div class="duration">
+  <input
+    class="short-input"
+    type="number"
+    min="0"
+    id="duration"
+    [value]="value"
+    (input)="onValueChange && onValueChange($event.target.value)"
+  />
+  <span>{{ value | hoursFromMinutes }}</span>
+</div>
