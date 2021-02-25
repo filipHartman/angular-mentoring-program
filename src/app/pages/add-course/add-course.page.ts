@@ -44,16 +44,25 @@ export class AddCourseComponent implements OnInit {
 
   private initializeForm(): FormGroup {
     return this.fb.group({
-      title: new FormControl('', Validators.required),
-      description: new FormControl('', Validators.required),
+      title: new FormControl('', [
+        Validators.required,
+        Validators.maxLength(50),
+      ]),
+      description: new FormControl('', [
+        Validators.required,
+        Validators.maxLength(500),
+      ]),
       date: new FormControl('', Validators.required),
-      duration: new FormControl('', Validators.required),
+      duration: new FormControl('', [
+        Validators.required,
+        Validators.pattern(/^[0-9]+$/),
+      ]),
     });
   }
   updateFormWithCourseData(course: Course): void {
     this.title.setValue(course.name);
     this.description.setValue(course.description);
-    this.date.setValue(format(course.date.toString(), 'yyyy-MM-dd'));
+    this.date.setValue(format(course.date.toString(), 'YYYY-MM-DD'));
     this.duration.setValue(course.length);
     this.addCourseForm.updateValueAndValidity();
   }

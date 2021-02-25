@@ -44,13 +44,19 @@
   }
 
   & .submit {
-    background: #67a300;
+    background-color: #67a300;
     color: white;
+    cursor: pointer;
   }
 
   & .cancel {
     margin-left: 1rem;
     background-color: #ce0707;
     color: white;
+    cursor: pointer;
+  }
+  & .disabled {
+    background-color: rgba($color: #67a300, $alpha: 0.4);
+    cursor: default;
   }
 }

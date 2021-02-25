@@ -1,0 +1,8 @@
+<label for="date">Creation date</label>
+<input
+  class="short-input"
+  type="date"
+  id="date"
+  [value]="value"
+  (change)="onChange && onChange($event.target.value)"
+/>
