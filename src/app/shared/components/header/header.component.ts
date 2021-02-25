@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { faSignOutAlt, faUser } from '@fortawesome/free-solid-svg-icons';
 import { NameModel } from '@interfaces/user';
 import { AuthService } from '@services/auth/auth.service';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-header',
@@ -19,12 +21,14 @@ export class HeaderComponent {
     private readonly router: Router,
   ) {}
 
-  get isAuthenticated(): boolean {
+  get isAuthenticated$(): Observable<boolean> {
     return this.auth.isAuthenticated();
   }
 
-  get userName(): NameModel {
-    return this.auth.getUserInfo().name;
+  get userName$(): Observable<NameModel | null> {
+    return this.auth
+      .getUserInfo()
+      .pipe(map((user) => (!!user ? user.name : null)));
   }
 
   logout(): void {

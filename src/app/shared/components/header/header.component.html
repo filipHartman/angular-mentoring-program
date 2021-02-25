@@ -1,7 +1,13 @@
 <header class="header">
   <app-logo class="logo"></app-logo>
-  <div *ngIf="isAuthenticated" class="buttons">
-    <button mat-button [matMenuTriggerFor]="userInfo" class="user">
+  <div *ngIf="isAuthenticated$ | async" class="buttons">
+    <mat-menu #menu="matMenu">
+      <div class="menu" *ngIf="userName$ | async as userName">
+        <span>First Name: {{ userName.first }}</span>
+        <span>Last Name: {{ userName.last }}</span>
+      </div>
+    </mat-menu>
+    <button mat-button [matMenuTriggerFor]="menu" class="user">
       <fa-icon [icon]="userIcon"></fa-icon> User login
     </button>
     <button class="logout" (click)="logout()">
@@ -9,10 +15,3 @@
     </button>
   </div>
 </header>
-
-<mat-menu #userInfo="matMenu" *ngIf="isAuthenticated">
-  <div class="menu">
-    <span>First Name: {{ userName.first }}</span>
-    <span>Last Name: {{ userName.last }}</span>
-  </div>
-</mat-menu>

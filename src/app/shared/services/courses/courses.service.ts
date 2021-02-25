@@ -6,6 +6,7 @@ import { ApiService } from '@services/api/api.service';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { generate } from 'shortid';
+import { StoreFacade } from './../../store/store.facade';
 
 @Injectable({
   providedIn: 'root',
@@ -18,28 +19,27 @@ export class CoursesService {
   private numberOfCourses = 5;
   private paginationStep = 5;
 
-  constructor(private readonly api: ApiService) {
+  constructor(
+    private readonly api: ApiService,
+    private readonly store: StoreFacade,
+  ) {
     this.getCoursesFromBE();
   }
 
   getCoursesFromBE(): void {
-    this.api.getAllCourses(this.numberOfCourses).subscribe({
-      next: (courses) => this.courses.next(courses),
-    });
+    this.store.getCourses(this.numberOfCourses);
   }
 
   get courses$(): Observable<Course[]> {
-    return this.courses
-      .asObservable()
-      .pipe(
-        map((courses) =>
-          courses.length !== 0 ? this.order.transform(courses) : null,
-        ),
-      );
+    return this.store.courses$.pipe(
+      map((courses) =>
+        courses.length !== 0 ? this.order.transform(courses) : null,
+      ),
+    );
   }
 
   createCourse(newCourse: Course): void {
-    this.requestWithUpdateCourses(() => this.api.createCourse(newCourse));
+    this.requestWithUpdateCourses(() => this.store.addCourse(newCourse));
   }
 
   getItemById(id: string): Observable<Course> {
@@ -55,11 +55,11 @@ export class CoursesService {
   }
 
   updateItem(course: Course): void {
-    this.requestWithUpdateCourses(() => this.api.updateCourse(course));
+    this.requestWithUpdateCourses(() => this.store.updateCourse(course));
   }
 
   removeItem(course: Course): void {
-    this.requestWithUpdateCourses(() => this.api.deleteCourse(course));
+    this.requestWithUpdateCourses(() => this.store.deleteCourse(course));
   }
 
   getCurrentId(): string {

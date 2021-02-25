@@ -14,7 +14,7 @@ export class PageContainerComponent {
     private readonly spinner: SpinnerService,
   ) {}
 
-  get isAuthenticated(): boolean {
+  get isAuthenticated$(): Observable<boolean> {
     return this.auth.isAuthenticated();
   }
 

@@ -6,8 +6,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { SiteMap } from '@enums/site-map.enum';
 import { AuthService } from '@services/auth/auth.service';
-import { SiteMap } from './../../shared/enums/site-map.enum';
 
 @Component({
   selector: 'app-login',
@@ -29,12 +29,11 @@ export class LoginComponent {
         login: this.email.value,
         password: this.password.value,
       })
-      .subscribe(
-        () => {
+      .subscribe((isAuthenticated: boolean) => {
+        if (isAuthenticated) {
           this.router.navigateByUrl(SiteMap.COURSES);
-        },
-        (err) => console.error(err),
-      );
+        }
+      });
   }
 
   get email(): FormControl {

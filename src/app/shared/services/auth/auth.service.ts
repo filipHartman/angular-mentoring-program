@@ -1,39 +1,32 @@
 import { Injectable } from '@angular/core';
-import { TokenResponse } from '@interfaces/token-reponse';
 import { LoginUser, User } from '@interfaces/user';
 import { Observable } from 'rxjs';
-import { switchMap, tap } from 'rxjs/operators';
-import { ApiService } from './../api/api.service';
+import { StoreFacade } from './../../store/store.facade';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private readonly KEY = 'user';
+  constructor(private readonly store: StoreFacade) {}
 
-  constructor(private readonly api: ApiService) {}
-
-  login(user: LoginUser): Observable<unknown> {
-    return this.api.authenticateUser(user).pipe(
-      switchMap((res: TokenResponse) => this.api.getCurrentUser(res)),
-      tap((user) => sessionStorage.setItem(this.KEY, JSON.stringify(user))),
-    );
+  login(user: LoginUser): Observable<boolean> {
+    this.store.login(user);
+    return this.isAuthenticated();
   }
 
   logout(): void {
-    sessionStorage.removeItem(this.KEY);
+    this.store.logout();
   }
 
-  isAuthenticated(): boolean {
-    return !!this.getToken();
+  isAuthenticated(): Observable<boolean> {
+    return this.store.isAuthenticated$;
   }
 
-  getToken(): string {
-    const user: User = this.getUserInfo();
-    return !!user ? user.token : null;
+  getToken(): Observable<string> {
+    return this.store.token$;
   }
 
-  getUserInfo(): User {
-    return JSON.parse(sessionStorage.getItem(this.KEY));
+  getUserInfo(): Observable<User> {
+    return this.store.currentUser$;
   }
 }
